@@ -13,19 +13,13 @@ def userInput():
     return userString
 
 def checkInput():
-    inputList = [None, None, None, None]
-    str = userInput()
-    match = re.search(r'([A-H])([1-8])\sto\s([A-H])([1-8])', str)
-    if match:
-        inputList[0] = match.group(1)
-        inputList[1] = match.group(2)
-        inputList[2] = match.group(3)
-        inputList[3] = match.group(4)
-        return inputList
+    str = userInput().upper()
+    matches = re.search(r'([A-H])([1-8])\sTO\s([A-H])([1-8])', str)
+    if matches:   
+        return [match for match in matches.groups()]        
     else:
-        inputList = [0, 0, 0, 0]
         print "Erroneous input, please try again"
-        checkInput()
+        return checkInput()
 
 def assignValues():
     """col and row swapped need to switch then assign"""
