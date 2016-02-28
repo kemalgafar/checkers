@@ -64,8 +64,19 @@ def checkValidMove(user_move_coords): #has to return a bool
     tst_arr = user_move_coords #only to save space/improve readabilty 
     if tst_arr[0], tst_arr[1] == tst_arr[2], tst_arr[3]:
         print "test case 1"
+        return True
     elif Board.cur_state[tst_arr[0]][tst_arr[1]] == None:
+        #case is player chooses a sq with no pieces
         print "tst case 2"
+        return True
+    elif (tst_arr[0] != ((tst_arr[0] + 1) or (tst_arr[0] - 1))) or (tst_arr[1] != ((tst_arr[1] + 1) or (tst_arr[1] - 1))) #put this after checking if possible capture
+        print "test case 3"
+        #case if player chooses a red square to move from
+        return True
+    elif (tst_arr[2] != ((tst_arr[2] + 1) or (tst_arr[2] - 1))) or (tst_arr[3] != ((tst_arr[3] + 1) or (tst_arr[3] - 1))) #put this after checking if possible capture
+        print "test case 3"
+        #case if player chooses a red square to move to
+        return True
     elif
     
 
