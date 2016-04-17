@@ -6,39 +6,39 @@ from gameMechanics import assignValues
 class Board(object):
     def __init__(self):
 	    self.cur_state = [[None for i in xrange(8)] for j in xrange(8)]
-	    self.placePieces()
-    
-    def placePieces(self):
+	    self.place_pieces()
+
+    def place_pieces(self):
         """Places pieces on a game board at the starting positions"""
-        initialBoard = self.cur_state
-           
-        initialBoard[0][1] = RedPiece()
-        initialBoard[0][3] = RedPiece()
-        initialBoard[0][5] = RedPiece()
-        initialBoard[0][7] = RedPiece()
-        initialBoard[1][0] = RedPiece()
-        initialBoard[1][2] = RedPiece()
-        initialBoard[1][4] = RedPiece()
-        initialBoard[1][6] = RedPiece()
-        initialBoard[2][1] = RedPiece()
-        initialBoard[2][3] = RedPiece()
-        initialBoard[2][5] = RedPiece()
-        initialBoard[2][7] = RedPiece()
-        initialBoard[5][0] = BlkPiece()
-        initialBoard[5][2] = BlkPiece()
-        initialBoard[5][4] = BlkPiece()
-        initialBoard[5][6] = BlkPiece()
-        initialBoard[6][1] = BlkPiece()
-        initialBoard[6][3] = BlkPiece()
-        initialBoard[6][5] = BlkPiece()
-        initialBoard[6][7] = BlkPiece()
-        initialBoard[7][0] = BlkPiece()
-        initialBoard[7][2] = BlkPiece()
-        initialBoard[7][4] = BlkPiece()
-        initialBoard[7][6] = BlkPiece()
-        
-        self.cur_state = initialBoard
-    
+        initial_board = self.cur_state
+
+        initial_board[0][1] = RedPiece()
+        initial_board[0][3] = RedPiece()
+        initial_board[0][5] = RedPiece()
+        initial_board[0][7] = RedPiece()
+        initial_board[1][0] = RedPiece()
+        initial_board[1][2] = RedPiece()
+        initial_board[1][4] = RedPiece()
+        initial_board[1][6] = RedPiece()
+        initial_board[2][1] = RedPiece()
+        initial_board[2][3] = RedPiece()
+        initial_board[2][5] = RedPiece()
+        initial_board[2][7] = RedPiece()
+        initial_board[5][0] = BlkPiece()
+        initial_board[5][2] = BlkPiece()
+        initial_board[5][4] = BlkPiece()
+        initial_board[5][6] = BlkPiece()
+        initial_board[6][1] = BlkPiece()
+        initial_board[6][3] = BlkPiece()
+        initial_board[6][5] = BlkPiece()
+        initial_board[6][7] = BlkPiece()
+        initial_board[7][0] = BlkPiece()
+        initial_board[7][2] = BlkPiece()
+        initial_board[7][4] = BlkPiece()
+        initial_board[7][6] = BlkPiece()
+
+        self.cur_state = initial_board
+
     @property
     def display(self):
         board = self.cur_state
@@ -49,7 +49,7 @@ class Board(object):
         for row_number, row in enumerate(board):
             row_to_print = [piece.dispColor() if piece else '  ' for piece in row]
             row_to_print.append('  ' + str(row_number))
-            
+
             print "  ".join(row_to_print)
 
 """
@@ -60,4 +60,3 @@ def main():
     print "you entered" , coords
 main()
 """
-

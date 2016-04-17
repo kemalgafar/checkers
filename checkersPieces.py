@@ -1,34 +1,24 @@
 class Piece(object):
     def __init__(self):
-        self.isAlive = True
-        self.isKing = False
-        #self.coordX = None
-        #self.coordY = None
-    
-    # do these 2 need to be funcs? can just be variables to be overwritten    
-    def isDead(self):
-        self.isAlive = False
-        
-    def isKing(self):
-        self.isKing = True
+        self.is_king = False
+
+    def is_king(self):
+        self.is_king = True
 
 class RedPiece(Piece):
-    
-    def dispColor(self):
-        if self.isKing == True:  #isking && isalive
+
+    def disp_color(self):
+        if self.is_king == True:
             color = "KR"
-        else:    #else if if alive
+        else:
             color = " R"
         return color
-    #else turn to None?
+
 class BlkPiece(Piece):
-    
-    def dispColor(self):
-        if self.isKing == True:
+
+    def disp_color(self):
+        if self.is_king == True:
             color = "KB"
         else:
             color = " B"
         return color
-
-    
-    
