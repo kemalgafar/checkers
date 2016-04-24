@@ -52,7 +52,7 @@ print cur_state
 def possible_moves(cur_state, i, j, valid_spaces, hist_str):
     # need to get a recursive function to TREE through the spaces
     # only use first 2 chars from hist string that way u can keep adding onto the string
-    is_red_turn == True
+    is_red_turn = True
 
     #if self.is_red_turn == True:  uncomment when adding back to Board class
     if is_red_turn == True:
@@ -63,7 +63,7 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str):
         enemy_2 = "KR"
 
     try:
-        if cur_state[i+1][j+1].disp_color == enemy_1 or enemy_2:
+        if cur_state[i+1][j+1] == enemy_1 or enemy_2:
             try:
                 if cur_state[i+2][j+2] == None:
                     valid_spaces[hist_str].append(str(i+2) + str(j+2))
@@ -83,7 +83,8 @@ def iterate_board(cur_state, valid_spaces):
         for j in xrange(8):
             #append the lower func?
             hist_str = (str(i) + str(j))
-            possible_moves(cur_state, i, j, valid_spaces, hist_str)
+            if hist_str in valid_spaces:
+                possible_moves(cur_state, i, j, valid_spaces, hist_str)
 
 iterate_board(cur_state, valid_spaces)
 print valid_spaces
