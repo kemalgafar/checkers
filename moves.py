@@ -70,26 +70,26 @@ place_pieces(cur_state)
 print cur_state
 
 def possible_moves(cur_state, i, j, valid_spaces, hist_str):
-    #NEED TO ACCOUNT FOR INDEX OUT OF RANGE
-    # take out the (i <...) (j<...)
     # handle the exception, maybe just Break from that iteration?
     # need to get a recursive function to TREE through the spaces
-    # instead MAKE i AND j A FUNCTION OF BOARD LENGTH ?????????
 
-    #use try and exception handling
+    try:
+        if cur_state[i+1][j+1] == "B":  #MESSY NEED TO FIX
+            try:
+                if cur_state[i+2][j+2] == None:
+                    valid_spaces[hist_str].append(str(i+2) + str(j+2))
+                    possible_moves(cur_state, i, j, valid_spaces, hist_str) #need to return?
+            except IndexError:
+                pass
+    except IndexError:
+        pass
 
-    if cur_state[i+1][j+1] == "B":  #MESSY NEED TO FIX
-        if cur_state[i+2][j+2] == None:
-            valid_spaces[hist_key].append(str(i+2) + str(j+2))
-        else:
-            print "i"
-    else:
-        print "b"
 
 # I DONT LIKE THE IDEA OF calling a function 64 times thru 2 nested loops
 # maybe just get the possible moves func to iterate itself, no need to nest functions
 
 def iterate_board(cur_state, valid_spaces):
+        # have this function be called twice, use the opponent dict
     for i in xrange(8):
         for j in xrange(8):
             #append the lower func?
