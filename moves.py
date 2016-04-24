@@ -74,7 +74,7 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str):
     # need to get a recursive function to TREE through the spaces
 
     try:
-        if cur_state[i+1][j+1] == "B":  #MESSY NEED TO FIX
+        if cur_state[i+1][j+1].disp_color == " B" or "KB":  #MESSY NEED TO FIX
             try:
                 if cur_state[i+2][j+2] == None:
                     valid_spaces[hist_str].append(str(i+2) + str(j+2))
@@ -90,6 +90,7 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str):
 
 def iterate_board(cur_state, valid_spaces):
         # have this function be called twice, use the opponent dict
+        # have the enemy state keep changing in the board class
     for i in xrange(8):
         for j in xrange(8):
             #append the lower func?

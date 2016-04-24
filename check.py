@@ -7,6 +7,7 @@ class Board(object):
     def __init__(self):
 	    self.cur_state = [[None for i in xrange(8)] for j in xrange(8)]
 	    self.place_pieces()
+        self.is_red_turn = True
 
     def place_pieces(self):
         """Places pieces on a game board at the starting positions"""
@@ -47,7 +48,7 @@ class Board(object):
         print "  " + "   ".join(["*"] * len(board))
 
         for row_number, row in enumerate(board):
-            row_to_print = [piece.dispColor() if piece else '  ' for piece in row]
+            row_to_print = [piece.disp_color() if piece else '  ' for piece in row]
             row_to_print.append('  ' + str(row_number))
 
             print "  ".join(row_to_print)
