@@ -30,10 +30,8 @@ def assign_values():
         user_move_coords[3] = char_look_up[user_input_vals[2]]
         # if the first two inputs aka the space 'from' isnt located within the possible moves dict, then prompt again and throw a error
 
-
-
         #bad_input = checkValidMove(user_move_coords)
-        
+
     return user_move_coords
 
 
