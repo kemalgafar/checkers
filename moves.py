@@ -72,9 +72,15 @@ print cur_state
 def possible_moves(cur_state, i, j, valid_spaces, hist_str):
     # handle the exception, maybe just Break from that iteration?
     # need to get a recursive function to TREE through the spaces
+    if self.is_red_turn == True:
+        enemy_1 = " B"
+        enemy_2 = "KB"
+    else:
+        enemy_1 = " R"
+        enemy_2 = "KR"
 
     try:
-        if cur_state[i+1][j+1].disp_color == " B" or "KB":  #MESSY NEED TO FIX
+        if cur_state[i+1][j+1].disp_color == enemy_1 or enemy_2:  #MESSY NEED TO FIX
             try:
                 if cur_state[i+2][j+2] == None:
                     valid_spaces[hist_str].append(str(i+2) + str(j+2))
