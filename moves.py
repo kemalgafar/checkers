@@ -49,7 +49,7 @@ place_pieces(cur_state)
 
 print cur_state
 
-def possible_moves(cur_state, i, j, valid_spaces, hist_str):
+def possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str):
 
     move_str = hist_str
     # need to get a recursive function to TREE through the spaces
@@ -88,7 +88,7 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str):
                         valid_spaces[hist_str].append(move_str)
                         i += 2
                         j += 2
-                        possible_moves(cur_state, i, j, valid_spaces, hist_str) #need to return?
+                        possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str) #need to return?
                 except IndexError:
                     pass
             if cur_state[i+1][j-1] == enemy_1 or enemy_2:
@@ -98,7 +98,7 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str):
                         valid_spaces[hist_str].append(move_str)
                         i += 2
                         j -= 2
-                        possible_moves(cur_state, i, j, valid_spaces, hist_str) #need to return?
+                        possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str) #need to return?
                 except IndexError:
                     pass
         except IndexError:
@@ -114,7 +114,8 @@ def iterate_board(cur_state, valid_spaces):
             #append the lower func?
             hist_str = (str(i) + str(j))
             if hist_str in valid_spaces:
-                possible_moves(cur_state, i, j, valid_spaces, hist_str)
+                move_str = None  #is passing this in nessecary
+                possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str)
 
 iterate_board(cur_state, valid_spaces)
 print valid_spaces
