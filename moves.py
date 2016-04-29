@@ -50,6 +50,8 @@ place_pieces(cur_state)
 print cur_state
 
 def possible_moves(cur_state, i, j, valid_spaces, hist_str):
+
+    move_str = hist_str
     # need to get a recursive function to TREE through the spaces
     # only use first 2 chars from hist string that way u can keep adding onto the string
     is_red_turn = True
@@ -58,22 +60,38 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str):
     if is_red_turn == True:
         enemy_1 = " B"
         enemy_2 = "KB"
+        self_1 = " R"
+        self_2 = "KR"
     else:
         enemy_1 = " R"
         enemy_2 = "KR"
+        self_1 = " B"
+        self_2 = "KB"
 
-    try:
-        if cur_state[i+1][j+1] == enemy_1 or enemy_2:
-            try:
-                if cur_state[i+2][j+2] == None:
-                    valid_spaces[hist_str].append(str(i+2) + str(j+2))
-                    i += 2
-                    j += 2
-                    possible_moves(cur_state, i, j, valid_spaces, hist_str) #need to return?
-            except IndexError:
-                pass
-    except IndexError:
-        pass
+    if cur_state[i][j] == self_1 or self_2:
+        try:
+            if cur_state[i+1][j+1] == enemy_1 or enemy_2:
+                try:
+                    if cur_state[i+2][j+2] == None:
+                        move_str += (str(i+2) + str(j+2))
+                        valid_spaces[hist_str].append(move_str)
+                        i += 2
+                        j += 2
+                        possible_moves(cur_state, i, j, valid_spaces, hist_str) #need to return?
+                except IndexError:
+                    pass
+            if cur_state[i+1][j-1] == enemy_1 or enemy_2:
+                try:
+                    if cur_state[i+2][j-2] == None:
+                        move_str += (str(i+2) + str(j-2))
+                        valid_spaces[hist_str].append(move_str)
+                        i += 2
+                        j -= 2
+                        possible_moves(cur_state, i, j, valid_spaces, hist_str) #need to return?
+                except IndexError:
+                    pass
+        except IndexError:
+            pass
 
 #NEED 4 of them
 
