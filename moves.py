@@ -77,6 +77,18 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str):
         self_1 = " B"
         self_2 = "KB"
 
+
+'''
+make each of the 4 choices a individ func
+have logic (if else) control
+if red or is_king do func1 func2
+else if ....
+each of the 4 possibilites is a func onto itself and calls possible moves again
+func(+1,+1)
+func(+1,-1)
+func(-1, +1)
+func(-1,-1)
+'''
 #handle negative numbers, so you dont appened a negative # to the string (move not valid)
 #or have a regex to handle when deciding which string to use
     if cur_state[i][j] == self_1 or self_2:
@@ -88,16 +100,18 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str):
                         valid_spaces[hist_str].append(move_str)
                         i += 2
                         j += 2
+                        cur_state[i][j] = self_1
                         possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str) #need to return?
                 except IndexError:
                     pass
-            if cur_state[i+1][j-1] == enemy_1 or enemy_2:
+            if cur_state[i+1][j-1] == enemy_1 or enemy_2:   #handle the negative here?
                 try:
                     if cur_state[i+2][j-2] == None:
                         move_str += (str(i+2) + str(j-2))
                         valid_spaces[hist_str].append(move_str)
                         i += 2
                         j -= 2
+                        cur_state[i][j] = self_1
                         possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str) #need to return?
                 except IndexError:
                     pass
@@ -114,7 +128,7 @@ def iterate_board(cur_state, valid_spaces):
             #append the lower func?
             hist_str = (str(i) + str(j))
             if hist_str in valid_spaces:
-                move_str = None  #is passing this in nessecary
+                move_str = ""  #is passing this in nessecary
                 possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str)
 
 iterate_board(cur_state, valid_spaces)
