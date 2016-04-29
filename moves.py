@@ -54,6 +54,15 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str):
     move_str = hist_str
     # need to get a recursive function to TREE through the spaces
     # only use first 2 chars from hist string that way u can keep adding onto the string
+
+    """
+    have all the is red turn stuff out of the moves functs
+    make a func and call it
+
+    have a master counter 0, 1, 2... in the Board class
+    even #s represent the first half of the turn, odd is second
+    have the is_red_turn func just mod2 the counter to determine red/black turn
+    """
     is_red_turn = True
 
     #if self.is_red_turn == True:  uncomment when adding back to Board class
@@ -68,6 +77,8 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str):
         self_1 = " B"
         self_2 = "KB"
 
+#handle negative numbers, so you dont appened a negative # to the string (move not valid)
+#or have a regex to handle when deciding which string to use
     if cur_state[i][j] == self_1 or self_2:
         try:
             if cur_state[i+1][j+1] == enemy_1 or enemy_2:
