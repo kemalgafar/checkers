@@ -35,7 +35,7 @@ def place_pieces(cur_state):
     initial_board[5][6] = "B"
     initial_board[6][1] = "B"
     initial_board[6][3] = "B"
-    initial_board[6][5] = "B"
+    #initial_board[6][5] = "B"
     initial_board[6][7] = "B"
     initial_board[7][0] = "B"
     initial_board[7][2] = "B"
@@ -75,6 +75,7 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str):
     except IndexError:
         pass
 
+#NEED 4 of them
 
 def iterate_board(cur_state, valid_spaces):
         # have this function be called twice per turn (1 red 1 black)
