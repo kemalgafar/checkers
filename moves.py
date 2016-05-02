@@ -1,4 +1,4 @@
-
+"""
 valid_spaces = {
     "01":[], "03":[], "05":[], "07":[],
     "10":[], "12":[], "14":[], "16":[],
@@ -9,20 +9,23 @@ valid_spaces = {
     "61":[], "63":[], "65":[], "67":[],
     "70":[], "72":[], "74":[], "76":[],
     }
-
+    #commented out for testing
+"""
+valid_spaces = {
+    "01":[], "03":[]
+    }
 cur_state = [[None for i in xrange(8)] for j in xrange(8)]
-
 
 def place_pieces(cur_state):
     """Places pieces on a game board at the starting positions"""
     initial_board = cur_state
 
-    initial_board[0][3] = "R"
-    initial_board[1][2] = "B"
-    initial_board[1][4] = "B"
-    initial_board[3][4] = "B"
-    initial_board[3][6] = "B"
-    initial_board[5][2] = "B"
+    initial_board[0][3] = " R"
+    initial_board[1][2] = " B"
+    initial_board[1][4] = " B"
+    initial_board[3][4] = " B"
+    initial_board[3][6] = " B"
+    initial_board[5][2] = " B"
 
     cur_state = initial_board
 
@@ -57,9 +60,6 @@ place_pieces(cur_state)
 
 def possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str):
 
-    # need to get a recursive function to TREE through the spaces
-    # only use first 2 chars from hist string that way u can keep adding onto the string
-
     """
     have all the is red turn stuff out of the moves functs
     make a func and call it
@@ -84,7 +84,6 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str):
 
 
     '''
-    make each of the 4 choices a individ func
     have logic (if else) control
     if red or is_king do func1 func2
     else if ....
@@ -92,8 +91,7 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str):
 
     new_i = i
     new_j = j
-#handle negative numbers, so you dont appened a negative # to the string (move not valid)
-#or have a regex to handle when deciding which string to use
+
 #make 4 funcs  need to call at the same time/ i/j will change, before call of func can check is king?
     try:
         move_p1_p1(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2)
@@ -102,22 +100,22 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str):
         pass
 
 def move_p1_p1(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2):
-    if cur_state[new_i+1][new_j+1] == enemy_1 or enemy_2:
+    if cur_state[new_i+1][new_j+1] == enemy_1 or cur_state[new_i+1][new_j+1] == enemy_2:
         try:
             if cur_state[new_i+2][new_j+2] == None:
                 new_i += 2
                 new_j += 2
-                if (new_i < 8) and (new_j < 8): #each of the four will be diff
+                if (new_i < 8) and (new_j < 8):
                     move_str += (str(new_i) + str(new_j))
                     valid_spaces[hist_str].append(move_str)
                     i = new_i
                     j = new_j
-                    possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str) #need to return?
+                    possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str)
         except IndexError:
             pass
 
 def move_p1_m1(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2):
-    if cur_state[new_i+1][new_j-1] == enemy_1 or enemy_2:
+    if cur_state[new_i+1][new_j-1] == enemy_1 or cur_state[new_i+1][new_j-1] == enemy_2:
         try:
             if cur_state[new_i+2][new_j-2] == None:
                 new_i += 2
@@ -127,7 +125,7 @@ def move_p1_m1(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_
                     valid_spaces[hist_str].append(move_str)
                     i = new_i
                     j = new_j
-                    possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str) #need to return?
+                    possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str)
         except IndexError:
             pass
 
@@ -140,11 +138,9 @@ def iterate_board(cur_state, valid_spaces):
         for j in xrange(8):
             #append the lower func?
             hist_str = (str(i) + str(j))
-            if hist_str in valid_spaces and cur_state[i][j] == "R":
+            if hist_str in valid_spaces and cur_state[i][j] == " R":
                 move_str = hist_str  #is passing this in nessecary
                 possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str)
-
-#def is_red_turn():
 
 iterate_board(cur_state, valid_spaces)
 print valid_spaces
