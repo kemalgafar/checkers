@@ -1,4 +1,4 @@
-"""
+
 valid_spaces = {
     "01":[], "03":[], "05":[], "07":[],
     "10":[], "12":[], "14":[], "16":[],
@@ -9,11 +9,7 @@ valid_spaces = {
     "61":[], "63":[], "65":[], "67":[],
     "70":[], "72":[], "74":[], "76":[],
     }
-    #commented out for testing
-"""
-valid_spaces = {
-    "01":[], "03":[]
-    }
+
 cur_state = [[None for i in xrange(8)] for j in xrange(8)]
 
 def place_pieces(cur_state):
@@ -100,7 +96,7 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str):
         pass
 
 def move_p1_p1(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2):
-    if cur_state[new_i+1][new_j+1] == enemy_1 or cur_state[new_i+1][new_j+1] == enemy_2:
+    if cur_state[new_i+1][new_j+1] == (enemy_1 or enemy_2):
         try:
             if cur_state[new_i+2][new_j+2] == None:
                 new_i += 2
@@ -115,7 +111,7 @@ def move_p1_p1(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_
             pass
 
 def move_p1_m1(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2):
-    if cur_state[new_i+1][new_j-1] == enemy_1 or cur_state[new_i+1][new_j-1] == enemy_2:
+    if cur_state[new_i+1][new_j-1] == (enemy_1 or enemy_2):
         try:
             if cur_state[new_i+2][new_j-2] == None:
                 new_i += 2
