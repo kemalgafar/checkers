@@ -7,7 +7,7 @@ valid_spaces = {
     "41":[], "43":[], "45":[], "47":[],
     "50":[], "52":[], "54":[], "56":[],
     "61":[], "63":[], "65":[], "67":[],
-    "70":[], "72":[], "74":[], "76":[],
+    "70":[], "72":[], "74":[], "76":[]
     }
 
 cur_state = [[None for i in xrange(8)] for j in xrange(8)]
@@ -59,6 +59,7 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str):
     """
     have all the is red turn stuff out of the moves functs
     make a func and call it
+    NO make it part of the class then attribute
 
     have a master counter 0, 1, 2... in the Board class
     even #s represent the first half of the turn, odd is second
@@ -90,12 +91,14 @@ def possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str):
 
 #make 4 funcs  need to call at the same time/ i/j will change, before call of func can check is king?
     try:
-        move_p1_p1(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2)
-        move_p1_m1(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2)
+        move_p_p(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2)
+        move_p_m(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2)
+        #move_m_p(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2)
+        #move_m_m(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2)
     except IndexError:
         pass
 
-def move_p1_p1(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2):
+def move_p_p(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2):
     if cur_state[new_i+1][new_j+1] == (enemy_1 or enemy_2):
         try:
             if cur_state[new_i+2][new_j+2] == None:
@@ -110,7 +113,7 @@ def move_p1_p1(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_
         except IndexError:
             pass
 
-def move_p1_m1(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2):
+def move_p_m(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2):
     if cur_state[new_i+1][new_j-1] == (enemy_1 or enemy_2):
         try:
             if cur_state[new_i+2][new_j-2] == None:
@@ -125,6 +128,35 @@ def move_p1_m1(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_
         except IndexError:
             pass
 
+def move_m_p(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2):
+    if cur_state[new_i-1][new_j+1] == (enemy_1 or enemy_2):
+        try:
+            if cur_state[new_i-2][new_j+2] == None:
+                new_i -= 2
+                new_j += 2
+                if (new_i > -1) and (new_j < 8):
+                    move_str += (str(new_i) + str(new_j))
+                    valid_spaces[hist_str].append(move_str)
+                    i = new_i
+                    j = new_j
+                    possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str)
+        except IndexError:
+            pass
+
+def move_m_m(cur_state, new_i, new_j, valid_spaces, hist_str, move_str, enemy_1, enemy_2):
+    if cur_state[new_i-1][new_j-1] == (enemy_1 or enemy_2):
+        try:
+            if cur_state[new_i-2][new_j-2] == None:
+                new_i -= 2
+                new_j -= 2
+                if (new_i > -1) and (new_j > -1):
+                    move_str += (str(new_i) + str(new_j))
+                    valid_spaces[hist_str].append(move_str)
+                    i = new_i
+                    j = new_j
+                    possible_moves(cur_state, i, j, valid_spaces, hist_str, move_str)
+        except IndexError:
+            pass
 
 def iterate_board(cur_state, valid_spaces):
         # have this function be called twice per turn (1 red 1 black)
